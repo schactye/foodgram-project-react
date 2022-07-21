@@ -1,6 +1,5 @@
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
-
 from api.models import (Favorite, Ingredient, IngredientQuantity, Recipe,
                         ShoppingCart, Tag)
 from users.serializers import CustomUserSerializer
@@ -80,7 +79,6 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
     ingredients = IngredientWriteSerializer(many=True)
     author = CustomUserSerializer(read_only=True)
     image = Base64ImageField()
-
 
     class Meta:
         model = Recipe
