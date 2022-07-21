@@ -2,11 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.environ.get(
-    'SECRET_KEY',
-    default=
-    'django-insecure-iqbwl43gbu#+t=*4zi942pfk0e!v8c80rmh%1wx^6l7d+d+3h0'
-    )
+SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = os.environ.get('DEBUG')
 
