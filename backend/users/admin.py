@@ -1,6 +1,5 @@
-from django.contrib import admin
-
-from .models import Follow, User
+from backend.api import admin
+from backend.users.models import Follow, User
 
 
 @admin.register(User)
