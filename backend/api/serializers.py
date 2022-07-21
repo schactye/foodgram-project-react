@@ -1,7 +1,8 @@
+from drf_extra_fields.fields import Base64ImageField
 from backend.api.models import (Favorite, Ingredient, IngredientQuantity,
                                 Recipe, ShoppingCart, Tag)
 from backend.users import serializers
-from drf_extra_fields.fields import Base64ImageField
+
 
 
 class TagSerializer(serializers.ModelSerializer):
