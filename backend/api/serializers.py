@@ -1,8 +1,9 @@
 from api.models import (Favorite, Ingredient, IngredientQuantity, Recipe,
                         ShoppingCart, Tag)
-from users.serializers import CustomUserSerializer
 from drf_extra_fields.fields import Base64ImageField
+from users.serializers import CustomUserSerializer
 from rest_framework import serializers
+
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
