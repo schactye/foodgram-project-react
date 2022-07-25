@@ -1,8 +1,7 @@
-from api.admin import Recipe
-from users.serializers import CustomUserSerializer
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
-
+from users.serializers import CustomUserSerializer
+from api.admin import Recipe
 from api.models import (Favorite, Ingredient, IngredientQuantity, Recipe,
                         ShoppingCart, Tag)
 
@@ -130,7 +129,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
 
         return data
 
-    def create_ingredients(self, ingredients, recipe): 
+    def create_ingredients(self, ingredients, recipe):
         ingredient_list = []
         for ingredient_item in ingredients:
             new_ingredient = IngredientQuantity(
@@ -140,7 +139,6 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
             )
             ingredient_list.append(new_ingredient)
         IngredientQuantity.objects.bulk_create(ingredient_list)
-
 
     def create_tags(self, tags, recipe):
         for tag in tags:
