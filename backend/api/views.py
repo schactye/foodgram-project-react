@@ -5,15 +5,15 @@ from api.serializers import (FavoriteSerializer, IngredientSerializer,
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from api.models import (Favorite, Ingredient, IngredientQuantity, Recipe,
-                        ShoppingCart, Tag)
-from api.filters import IngredientSearchFilter, RecipeFilter
 from api.pagination import CustomPageNumberPagination
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from api.filters import IngredientSearchFilter, RecipeFilter
+from api.models import (Favorite, Ingredient, IngredientQuantity, Recipe,
+                        ShoppingCart, Tag)
 
 
 class TagsViewSet(ReadOnlyModelViewSet):
