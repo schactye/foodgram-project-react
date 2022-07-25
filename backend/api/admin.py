@@ -1,6 +1,7 @@
-from backend.api.models import (Favorite, Ingredient, IngredientQuantity,
-                                Recipe, ShoppingCart, Tag)
-from backend.users import admin
+from django.contrib import admin
+
+from api.models import (Favorite, Ingredient, IngredientQuantity, Recipe,
+                        ShoppingCart, Tag)
 
 
 @admin.register(Tag)
