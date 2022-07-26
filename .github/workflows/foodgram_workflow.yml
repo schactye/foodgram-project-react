@@ -63,7 +63,8 @@ jobs:
             cd ~/infra/
             sudo docker pull schactye/foodgram:latest
             sudo docker-compose stop
-            sudo docker-compose rm backend
+            sudo docker-compose rm -f backend
+            rm .env
             touch .env 
             echo SECRET_KEY=${{ secrets.SECRET_KEY }} > .env
             echo DEBUG=${{ secrets.DEBUG }} > .env

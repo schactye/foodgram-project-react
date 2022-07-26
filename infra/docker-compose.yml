@@ -12,8 +12,8 @@ services:
     image: schactye/foodgram:latest
     restart: always
     volumes:
-      - static_value:/code/static/
-      - media_value:/code/media/
+      - static_value:/app/backend_static/
+      - media_value:/app/media/
     depends_on:
       - db
     env_file:
@@ -33,8 +33,8 @@ services:
       - ../frontend/build:/usr/share/nginx/html/
       - ../docs/redoc.html:/usr/share/nginx/html/api/docs/redoc.html
       - ../docs/openapi-schema.yml:/usr/share/nginx/html/api/docs/openapi-schema.yml
-      - static_value:/code/backend_static/
-      - media_value:/code/media/
+      - static_value:/app/backend_static/
+      - media_value:/app/media/
     restart: always
     depends_on:
       - backend
