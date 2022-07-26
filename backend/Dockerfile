@@ -1,7 +1,7 @@
 FROM python:3.8
 
-WORKDIR /code
-COPY requirements.txt /code
-RUN pip3 install -r /code/requirements.txt --no-cache-dir
-COPY . /code
+WORKDIR /app
+COPY requirements.txt /app
+RUN pip3 install -r /app/requirements.txt --no-cache-dir
+COPY . /app
 CMD ["gunicorn", "foodgram.wsgi:application", "--bind", "0:8000" ] 
