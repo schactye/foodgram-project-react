@@ -57,7 +57,7 @@ class RecipeViewSet(ModelViewSet):
     def delete_favorite(self, request, pk):
         user = request.user
         recipe = get_object_or_404(Recipe, id=pk)
-        favorite = Favorite.filter(user=user, recipe=recipe)
+        favorite = Favorite.objects.filter(user=user, recipe=recipe)
         if favorite.exists():
             favorite.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -80,7 +80,7 @@ class RecipeViewSet(ModelViewSet):
     def delete_shopping_cart(self, request, pk):
         user = request.user
         recipe = get_object_or_404(Recipe, id=pk)
-        shopping_cart = ShoppingCart.filter(user=user, recipe=recipe)
+        shopping_cart = ShoppingCart.objects.filter(user=user, recipe=recipe)
         if shopping_cart.exists():
             shopping_cart.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
