@@ -42,7 +42,7 @@ class RecipeViewSet(ModelViewSet):
             return RecipeListSerializer
         return RecipeWriteSerializer
 
-    @action(detail=True, permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=['POST'], permission_classes=[IsAuthenticated])
     def favorite(self, request, pk):
         data = {'user': request.user.id, 'recipe': pk}
         serializer = FavoriteSerializer(
@@ -56,13 +56,15 @@ class RecipeViewSet(ModelViewSet):
     def delete_favorite(self, request, pk):
         user = request.user
         recipe = get_object_or_404(Recipe, id=pk)
-        favorite = get_object_or_404(
-            Favorite, user=user, recipe=recipe
-        )
-        favorite.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        favorite = Favorite.filter(user=user, recipe=recipe)
+        if favorite.exists():
+            favorite.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({
+            'errors': 'рецепт удалён!'
+        }, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=True, permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=['POST'], permission_classes=[IsAuthenticated])
     def shopping_cart(self, request, pk):
         data = {'user': request.user.id, 'recipe': pk}
         serializer = ShoppingCartSerializer(
@@ -76,11 +78,13 @@ class RecipeViewSet(ModelViewSet):
     def delete_shopping_cart(self, request, pk):
         user = request.user
         recipe = get_object_or_404(Recipe, id=pk)
-        shopping_cart = get_object_or_404(
-            ShoppingCart, user=user, recipe=recipe
-        )
-        shopping_cart.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        shopping_cart = ShoppingCart.filter(user=user, recipe=recipe)
+        if shopping_cart.exists():
+            shopping_cart.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({
+            'errors': 'рецепт не был удалён!'
+        }, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, permission_classes=[IsAuthenticated])
     def download_shopping_cart(self, request):
