@@ -1,5 +1,6 @@
 from api.models import Recipe
 from djoser.serializers import UserCreateSerializer, UserSerializer
+from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 from users.models import Follow, User
@@ -21,11 +22,13 @@ class CustomUserSerializer(UserSerializer):
             'last_name', 'is_subscribed'
         )
 
-    def get_is_subscribed(self, obj):
-        request = self.context.get('request')
-        if not request or request.user.is_anonymous:
-            return False
-        return Follow.objects.filter(user=request.user, following=obj).exists()
+
+class RecipeSubcribeSerializer(serializers.ModelSerializer):
+    image = Base64ImageField()
+
+    class Meta:
+        model = Recipe
+        fields = ('id', 'name', 'image', 'cooking_time',)
 
 
 class FollowSerializer(serializers.ModelSerializer):
