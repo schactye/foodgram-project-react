@@ -22,13 +22,11 @@ class CustomUserSerializer(UserSerializer):
             'last_name', 'is_subscribed'
         )
 
-
-class RecipeSubcribeSerializer(serializers.ModelSerializer):
-    image = Base64ImageField()
-
-    class Meta:
-        model = Recipe
-        fields = ('id', 'name', 'image', 'cooking_time',)
+    def get_is_subscribed(self, obj):
+        request = self.context.get('request')
+        if not request or request.user.is_anonymous:
+            return False
+        return Follow.objects.filter(user=request.user, following=obj).exists()
 
 
 class FollowSerializer(serializers.ModelSerializer):
