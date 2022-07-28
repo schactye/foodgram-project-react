@@ -128,7 +128,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
 
         return data
 
-    def create_ingredients(self, ingredients, Recipe):
+    def create_ingredients(self, ingredients, recipe):
         ingredient_list = []
         for ingredient_item in ingredients:
             new_ingredient = IngredientQuantity(

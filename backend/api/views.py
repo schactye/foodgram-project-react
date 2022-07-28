@@ -42,7 +42,8 @@ class RecipeViewSet(ModelViewSet):
             return RecipeListSerializer
         return RecipeWriteSerializer
 
-    @action(detail=True, methods=['POST'], permission_classes=[IsAuthenticated])
+    @action(
+        detail=True, methods=['POST'], permission_classes=[IsAuthenticated])
     def favorite(self, request, pk):
         data = {'user': request.user.id, 'recipe': pk}
         serializer = FavoriteSerializer(
@@ -64,7 +65,8 @@ class RecipeViewSet(ModelViewSet):
             'errors': 'рецепт удалён!'
         }, status=status.HTTP_400_BAD_REQUEST)
 
-    @action(detail=True, methods=['POST'], permission_classes=[IsAuthenticated])
+    @action(
+        detail=True, methods=['POST'], permission_classes=[IsAuthenticated])
     def shopping_cart(self, request, pk):
         data = {'user': request.user.id, 'recipe': pk}
         serializer = ShoppingCartSerializer(
